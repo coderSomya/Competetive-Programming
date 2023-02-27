@@ -1,3 +1,7 @@
+/*
+problem link -
+https://codeforces.com/problemset/problem/1788/C
+*/
 #include <bits/stdc++.h>
 using namespace std;
 #define loop(i,l,r)     for(int i=l; i<r; i++)
