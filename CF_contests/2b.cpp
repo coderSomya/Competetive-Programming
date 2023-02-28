@@ -1,3 +1,8 @@
+/*
+not a correct solution! <😞 > 
+*/
+
+
 #include <bits/stdc++.h>
 using namespace std;
 #define loop(i,l,r)     for(int i=l; i<r; i++)
@@ -21,96 +26,74 @@ using namespace std;
 const int mod= 1e9+7;
 const int inf= 1e15;
  
-
-//we can bring everything to 2, or itself
-
-void solve(){
-   int n; cin>>n; int arr[n];
-   loop(i,0,n) cin>>arr[i];
-
-   unordered_map<int, vi> mp;
-   umpii freq;
-
-   loop(i,0,n) {
-    mp[arr[i]].pb(i+1);
-    freq[arr[i]]++;
-   }
-
-   sort(arr, arr+n);
-
-   if(arr[0]==1 && arr[n-1]!=1){
-    cout<<-1<<endl; return;
-   }
-
-   if(arr[0]==arr[n-1]){
-    cout<<0<<endl; return ;
-   }
-   int ans=0;
-   vector<pair<int, int>> v;
-
-  
  
+void solve(){
+    take_n
+    take_arr
 
-   //ans exists and is equal to 2
- int last=-1;  
- loop(i,1,n){
-    int x=arr[i];
-    if(x>arr[0]){
-        //make it 2
+    vi mini;//index of all the minimum elements
+    vi others;//indes of other elements
+    int x=2e9;
+    loop(i,0,n){
+        x=min(x, arr[i]);
+    }
+
+    loop(i,0,n){
+        
+        if(arr[i]==x) mini.pb(i);
+        else others.pb(i);
+    }
+
+    if(others.size()==0) {
+        cout<<0<<endl;
+        return;
+    }
+
+    else if(x==1){
+        cout<<-1<<endl;
+        return;
+    }
+
+    vector<pair<int, int>>v;
+    int ans=0;
+    int k=arr[mini[0]];
+
+    for(int a: others){
+
         int temp=0;
+        while(arr[a]!=2){
+            if(arr[a]==k){
+                mini.pb(a);
+                break;
+            }
+            arr[a]=(arr[a]+k-1)/k;
+            temp++;
+        }
+        ans+=temp;
+        v.pb({a, mini[0]});
+    }
 
-        while(arr[i]!=2){
-            arr[i]=(arr[i]+arr[0]-1)/arr[0];
+    // cout<<"here atleast"<<endl;
+    if(mini.size()!=n){
+    int y=arr[others[0]];
+    for(int b: mini){
+        int temp=0;
+        while(arr[b]!=2){
+            arr[b]=(arr[b]+y-1)/y;
             temp++;
         }
 
         ans+=temp;
-
-        
-
-         v.pb({mp[arr[i]][freq[arr[i]]-1], mp[arr[0]][0]});
-
-    
-        freq[arr[i]]--;
-
+        v.pb({b, others[0]});
     }
- 
-   
- }
-
- //now only thing is tomake arr[0]
-
- //==2
-
- for(int i=0; i<freq[arr[0]]; i++){
-     //second = arr[freq[arr[0]]];
-     int y= arr[freq[arr[0]]];
-    int temp=0;
-     while(arr[i]!=2){
-        arr[i]= (arr[i]+y-1)/y;
-        temp++;
-     }
-
-     ans+=temp;
-     v.pb({mp[arr[0]][i], mp[y][0]});
- }
-
-
+    }
 
 
 cout<<ans<<endl;
 
-loop(i,0,v.size()){
-    cout<<v[i].first<<" "<<v[i].second<<endl;
+
+
 }
-
- }
-
-//ab bus
-   
-
- 
-
   
   
 int32_t main(){
