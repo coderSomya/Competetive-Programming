@@ -1,0 +1,88 @@
+/*
+problem link -
+https://atcoder.jp/contests/abc291/editorial/5862
+
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+#define loop(i,l,r)     for(int i=l; i<r; i++)
+#define int             long long
+#define pb              push_back
+#define vi              vector<int>
+#define mkp             make_pair<int,int>
+#define umpii           unordered_map<int,int>
+#define maxheap         priority_queue<int>
+#define minheap         priority_queue<int, vi,greater<int>>
+#define setbits(x)      __builtin_popcountll(x)
+#define zerobits(x)     __builtin_ctzll(x)
+#define in_arr(A,n)     loop(i,0,n) cin>>A[i];
+#define p_arr(A,n)      loop(i,0,n) cout<<A[i]
+;
+#define pln_arr(A,n)    loop(i,0,n) cout<<A[i]<<endl
+#define take_n          int n; cin>>n;
+#define take_arr        int arr[n]; loop(i,0,n) cin>>arr[i];
+  
+  
+const int mod= 1e9+7;
+const int inf= 1e15;
+
+
+ 
+void solve(){
+    
+    int n,m;
+    cin>>n>>m;
+
+    vi indegree(n+1,0);
+    vector<vi> g(n+1);
+
+    queue<int> q;
+    vi ans(n);
+
+    //bade wala-> chota wala
+    
+    loop(i,0,m){
+        int x, y;
+        cin>>x>>y;
+        g[y].pb(x);
+        indegree[x]++;
+    }
+
+    loop(i,1,n+1){
+        if(indegree[i]==0) q.push(i);
+    }
+
+    bool flag=true;
+
+    while(!q.empty()){
+        if(q.size()>1){
+            flag=false; break;
+        }
+
+        int x= q.back();
+        q.pop();
+        ans[x-1]=n;
+        n--;
+        for(auto y: g[x]){
+            indegree[y]--;
+            if(indegree[y]==0) q.push(y);
+        } 
+    }
+
+    if(flag) {
+        cout<<"Yes"<<endl;
+    loop(i,0,ans.size()) cout<<ans[i]<<" ";
+    cout<<endl;
+    }
+    else cout<<"No"<<endl;
+}
+  
+  
+int32_t main(){
+// int t;
+// cin>>t;
+// while(t--) 
+solve();
+return 0;
+}
