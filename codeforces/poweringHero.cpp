@@ -1,6 +1,6 @@
 /*
 problem link -
-https://codeforces.com/contest/1800/problem/C1
+https://codeforces.com/contest/1800/problem/C2
 */
 
 #include <bits/stdc++.h>
