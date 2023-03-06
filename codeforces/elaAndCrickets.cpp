@@ -53,16 +53,21 @@ void solve(){
         return;
     }
 
-    if((r==1 && c==1)|| (r==n && c==n)){
+    if((r==1 || r==n) && (c==1 || c==n)){
         cout<<"NO"<<endl;
         return;
     }
 
    
-
-   if(!parity(x,r) && !parity(y,c)) cout<<"NO"<<endl;
-
-   else cout<<"YES"<<endl;
+ if(parity(x,r)){
+    cout<<"YES"<<endl;
+ }
+ else{
+    if(parity(y,c)){
+        cout<<"YES"<<endl;
+    }
+    else cout<<"NO"<<endl;
+ }
 
 }
   
