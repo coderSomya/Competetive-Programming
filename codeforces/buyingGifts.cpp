@@ -1,5 +1,5 @@
 /*
-problem link->
+problem link ->
 https://codeforces.com/problemset/problem/1801/B
 */
 
@@ -25,111 +25,65 @@ using namespace std;
   
 const int mod= 1e9+7;
 const int inf= 1e15;
- 
-vi a,b;
-int n;
-int mini= 2e9;
-
-//find smallest diff
-//find second smallest diff
-
-int low(int i){
-    //last lowest
-    int ans=-1;
-
-    int l=0; int h=n-1;
-
-    while(l<h){
-        int mid=(l+h)/2;
-
-        if(b[mid]<=a[i]){
-            ans=mid;
-            l=mid+1;
-        }
-        else{
-            h=mid-1;
-        }
-    }
-
-    return ans;
-
-}
-
-int high(int i){
-    //first highest
-
-        int ans=n+8;
-
-    int l=0; int h=n-1;
-
-    while(l<h){
-        int mid=(l+h)/2;
-
-        if(b[mid]>=a[i]){
-            ans=mid;
-            h=mid-1;
-        }
-        else{
-            h=mid-1;
-        }
-    }
-
-    return ans;
-    
-}
-
 
 void solve(){
-   cin>>n;
-    umpii freq;
-    a.clear(); b.clear();
-    loop(i,0,n){
+    int n; cin>>n;
+
+    vector<pair<int,int>>v;
+    loop(i,0,n) {
         int x,y; cin>>x>>y;
-        a.pb(x); b.pb(y);
-        freq[y]++;   
+        v.pb({x,y});
     }
-
-    vi c= b;
-    int ans=2e9;
-    
-    sort(b.begin(), b.end());
-  
-    //check for each i
-   loop(i,0,n){
-   
-    set<int>st;
-     int x= low(i);
-     int y=high(i);
-
-     if(x!=-1){
-        st.insert(b[x]);
+    int suff[n]; suff[n-1]=v[n-1].second;
+    for(int i=n-2;i>=0; i--) suff[i]=max(suff[i+1], v[i].second);
+    set<int> st;
+    st.insert(-inf);
+    sort(v.begin(), v.end());
+   int ans=2*inf;
+    loop(i,0,n){
+        
+        //let a[i] be the max of from a
+        //suff[i+1] will be one candidate
+        //upperbound(a[i]) will be another candidate
+        auto x= lower_bound(st.begin(), st.end(), v[i].first);
         x--;
-     }
-     if(x!=-1) st.insert(b[x]) ;
-
-     if(y<n) {
-        st.insert(b[y]);
-        y++;}
-
-    if(y<n) st.insert(b[y]);
   
-  for(auto x: st)
-   {
-    if(c[i]==x && freq[x]==1) continue;
+        int temp;
 
-    ans=min(ans, abs(x-a[i]));
-   }
-     
-   }
+        if(i==0){
+          
+            temp= abs(suff[i+1]-v[i].first);
+        }
+        else if(i==n-1){
+            
+           temp=inf;
+           loop(j,0,n-1) temp=min(temp, abs(v[j].second-v[n-1].first));
 
-   cout<<ans<<endl;
+        }
+        else{
+            //general case
+            if(suff[i+1]>=v[i].first){
+               temp=suff[i+1]-v[i].first;
+            }
+            else{
+             temp= min(v[i].first-suff[i+1], v[i].first-*x);
+            }
+        }
+      
+        st.insert(v[i].second);
+ans= min(ans, temp);
+
+    }
+   
+    cout<<ans<<endl;
+    
+
+    
 
 }
-  
-  
+
 int32_t main(){
-int t;
-cin>>t;
-while(t--) solve();
-return 0;
+    int t; cin>>t;
+    while(t--) solve();
+    return 0;
 }
