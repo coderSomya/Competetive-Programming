@@ -28,7 +28,7 @@ const int inf= 1e15;
  
 vector<vector<int>> fact(61,vector<int>(61,0));
 vi alex(61);
-//v[i] stores iCi/2 
+
 void solve(){
   
   take_n
