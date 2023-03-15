@@ -51,7 +51,7 @@ void solve(){
     }
     else{
        int ans= ct/2*y;
-         cout<<ans<<endl;
+       
     }
 
 
