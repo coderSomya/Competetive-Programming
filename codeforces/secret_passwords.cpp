@@ -1,6 +1,6 @@
 /*
 problem link ->
-https://codeforces.com/problemset/problem/1551/C
+https://codeforces.com/problemset/problem/1263/D
 */
 
 #include <bits/stdc++.h>
@@ -25,46 +25,65 @@ using namespace std;
   
 const int mod= 1e9+7;
 const int inf= 1e15;
+
+vector<vi> adj;
  
-//try to make each letter max 
+void dfs(int src, vector<bool> &vis){
+   
+   vis[src]=1;
+
+   for(auto x: adj[src]){
+    if(!vis[x]) dfs(x, vis);
+   }
+} 
 void solve(){
-    
+
     take_n
-    vector<string> v;
+    vector<vi> v(26);
     loop(i,0,n){
-        string s; cin>>s; v.pb(s);
+        string s; cin>>s;
+        vi seen(26,0);
+     
+        for(char ch: s){
+            if(seen[ch-'a']) continue;
+           v[ch-'a'].pb(i);
+           seen[ch-'a']=1;
+        }
     }
+  adj.clear(); adj.resize(n);
+
+    
+    loop(i,0,26){
+      
+        for(int j=0; j+1<v[i].size(); j++){
+
+        
+            adj[v[i][j]].pb(v[i][j+1]);
+            adj[v[i][j+1]].pb(v[i][j]);
+        }
+    }
+
 
     int ans=0;
-
-    loop(i,0,5){
-
-        int target='a'+i;
-        vi p;
-        loop(i,0,n){
-            int x=0,y=0;
-            for(int j=0; j<v[i].length(); j++){
-              x+= v[i][j]==target;
-              y+= v[i][j]!=target;
-            }
-            p.pb(x-y);
+    vector<bool> vis(n,0);
+    for(int i=0; i<n; i++){
+        if(!vis[i]){
+            ans++;
+            dfs(i,vis);
         }
-        sort(p.begin(), p.end());
-        int ct=0; int o=0;
-        for(int m=n-1; m>=0; m--){
-           o+=p[m];
-           if(o>0) ct++;
-           else break;
-        }
-        ans=max(ans,ct);
     }
+
     cout<<ans<<endl;
+
+
+
 }
   
   
 int32_t main(){
-int t;
-cin>>t;
-while(t--) solve();
+// int t;
+// cin>>t;
+// while(t--) 
+solve();
 return 0;
 }
