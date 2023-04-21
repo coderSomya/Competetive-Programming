@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Senior Graduation PPT</title>
+  <style>
+    /* Define the style for the slide layout */
+    .slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #F8EFEF;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Define the style for the title text */
+    .title {
+      font-size: 48px;
+      font-weight: bold;
+      text-align: center;
+      color: #FF7F50;
+      margin-bottom: 40px;
+    }
+
+    /* Define the style for the subtitle text */
+    .subtitle {
+      font-size: 24px;
+      text-align: center;
+      color: #A9A9A9;
+      margin-bottom: 20px;
+    }
+
+    /* Define the style for the image */
+    .image {
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Slide 1 -->
+  <div class="slide">
+    <div>
+      <h1 class="title">Senior Graduation</h1>
+      <h2 class="subtitle">Class of [YEAR]</h2>
+      <img class="image" src="img/senior1.jpg" alt="Senior 1">
+      <img class="image" src="img/senior2.jpg" alt="Senior 2">
+      <img class="image" src="img/senior3.jpg" alt="Senior 3">
+      <p class="subtitle">Congratulations on surviving four years of craziness!</p>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide">
+    <div>
+      <h1 class="title">Time Flies</h1>
+      <h2 class="subtitle">Remember when...</h2>
+      <img class="image" src="img/tenure1.jpg" alt="Tenure 1">
+      <img class="image" src="img/tenure2.jpg" alt="Tenure 2">
+      <img class="image" src="img/tenure3.jpg" alt="Tenure 3">
+      <p class="subtitle">We made unforgettable memories together!</p>
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide">
+    <div>
+      <h1 class="title">Inside Jokes</h1>
+      <h2 class="subtitle">Who can forget...</h2>
+      <img class="image" src="img/humor1.jpg" alt="Humor 1">
+      <img class="image" src="img/humor2.jpg" alt="Humor 2">
+      <img class="image" src="img/humor3.jpg" alt="Humor 3">
+      <p class="subtitle">The hilarious moments that brought us closer!</p>
+    </div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide">
+    <div>
+      <h1 class="title">Graduation Day</h1>
+      <h2 class="subtitle">Time to say goodbye...</h2>
+      <img class="image" src="img/grad1.jpg" alt="Graduation 1
