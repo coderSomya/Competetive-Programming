@@ -2,6 +2,8 @@
 #include <bitset>
 using namespace std;
 
+//space optimized solution using bitset
+
 bitset<100> col,ld,rd;
 
 int ans=0;
