@@ -3,7 +3,40 @@ a21<= a22<= a23<= a24
 a31<= a32>= a33<= a34
 a41<= a42<= a43<= a44
 
- 
+
+taarrrataa
+t-a 
+a-a 
+a-t 
+r-a 
+r-r 
+
+a-1
+r-1
+
+dcbcaebacccd
+d-d 
+c-c 
+b-c 
+c-c 
+a-a 
+e-b 
+
+a-1
+c-2
+d-1
+
+abccba
+
+a-a 
+b-b 
+c-c 
+
+a-1, b-1, c-1
+
+
+
+
 
 
 
