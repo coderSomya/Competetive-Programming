@@ -2,6 +2,7 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp"
     }
 }
