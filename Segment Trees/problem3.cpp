@@ -30,6 +30,8 @@ void build(vector<vector<int>> &st, int arr[], int ss, int se, int idx, int stid
     int maxi=max(st[2*idx][2], st[2*idx+1][2]);
     int total=max(st[2*idx][3], st[2*idx+1][3]);
 
+    //very poor implementation that.. duh
+
     st[idx]={prefm, suffm, maxi,total};
 }
 
