@@ -1,114 +1,88 @@
 /*
-problem link->
+problem  link->
 https://codeforces.com/problemset/problem/1714/G
 */
 
 #include <bits/stdc++.h>
 using namespace std;
+#define loop(i,l,r)     for(int i=l; i<r; i++)
+#define int             long long
+#define pb              push_back
+#define vi              vector<int>
+#define mkp             make_pair<int,int>
+#define umpii           unordered_map<int,int>
+#define maxheap         priority_queue<int>
+#define minheap         priority_queue<int, vi,greater<int>>
+#define setbits(x)      __builtin_popcountll(x)
+#define zerobits(x)     __builtin_ctzll(x)
+#define in_arr(A,n)     loop(i,0,n) cin>>A[i];
+#define p_arr(A,n)      loop(i,0,n) cout<<A[i]
+;
+#define pln_arr(A,n)    loop(i,0,n) cout<<A[i]<<endl
+#define take_n          int n; cin>>n;
+#define take_arr        int arr[n]; loop(i,0,n) cin>>arr[i];
+  
+  
+const int mod= 1e9+7;
+const int inf= 1e15;
 
-vector<vector<pair<int, pair<int, int>>>> adj;
+vector<int> vb;
+int curb;
+int cura;
+vector<int> a;
+vector<int> b;
 vector<int> ans;
-vector<int> adist;
-vector<int> bdist;
-vector<int> level;
-vector<int> par;
-vector<vector<int>> up(1e5, vector<int> (20));
-
-
+vector<vector<int>> adj;
 
 void dfs(int src){
-    
-    for(auto x: adj[src]){
-      level[x.first]=level[src]+1;
-      adist[x.first]=adist[src]+x.second.first;
-      bdist[x.first]=bdist[src]+x.second.second;
+    curb+=b[src];
+    cura+=a[src];
+    vb.push_back(curb);
+    ans[src]= upper_bound(vb.begin(), vb.end(), cura)-vb.begin();
 
-      dfs(x.first);
+    for(int x: adj[src])
+    {
+        dfs(x);
     }
- 
 
+    curb-=b[src];
+    cura-=a[src];
 
+    vb.pop_back();
 }
-
+ 
+ 
 void solve(){
     int n; cin>>n;
     adj.clear();
-    ans.clear();
-    adist.clear();
-    bdist.clear();
-    par.clear();
+    a.clear();
+    b.clear();
     adj.resize(n+1);
+    a.resize(n+1);
+    b.resize(n+1);
+    ans.clear();
     ans.resize(n+1);
-    adist.resize(n+1);
-    bdist.resize(n+1);
-    par.resize(n+1);
-    vector<int> level(n+1);
 
     for(int i=2; i<=n; i++){
-        int anc,ai,bi;
-        cin>>anc>>ai>>bi;
-        
-        adj[anc].push_back({i, {ai,bi}});
-        par[i]=anc;
-        up[i][0]=par[i];
+     int pr,ai,bi;
+     cin>>pr>>ai>>bi;
+
+     adj[pr].push_back(i);
+     a[i]=ai;
+     b[i]=bi;
     }
 
-    
-    
-   
-  
-    adist[1]=0;
-    bdist[1]=0;
-    ans[1]=0;
-    level[1]=0;
 
     dfs(1);
 
-     for(int j=1; j<=20; j++){
-       for(int node=1; node<=n; node++){
-        if(j<=level[node])
-        up[node][j]=up[up[node][j-1]][j-1];
-       }
-    }
-    
-    for(int i=2; i<=n; i++){
-        int l=0; int r=level[i];
-
-        //search within this range, maximum value such that bdist[k]<adist[i];
-       
-        while(l<=r){
-            int x=i;
-            int mid=(l+r)/2;
-
-            for(int j=0; j<=20; j++){
-                if(mid&(1<<j)){
-                    x=up[i][j];
-                }
-            }
-
-            if(bdist[x]>adist[i]){
-              r=mid-1;
-            }
-            else{
-             ans[i]=mid;
-             l=mid+1;
-            }
-            
-        }
-    }
-
-    for(int i=2; i<=n; i++) cout<<ans[i]<<" ";
-
+    for(int i=1; i<=n; i++) cout<<ans[i]-1<<" ";
     cout<<endl;
-
-  
-
 }
-
-int main(){
-    int t; cin>>t;
-
-    while(t--) solve();
-
-    return 0;
+  
+  
+int32_t main(){
+int t;
+cin>>t;
+while(t--) solve();
+return 0;
 }
