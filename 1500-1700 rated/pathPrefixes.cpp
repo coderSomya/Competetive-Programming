@@ -75,7 +75,7 @@ void solve(){
 
     dfs(1);
 
-    for(int i=1; i<=n; i++) cout<<ans[i]-1<<" ";
+    for(int i=2; i<=n; i++) cout<<ans[i]-1<<" ";
     cout<<endl;
 }
   
