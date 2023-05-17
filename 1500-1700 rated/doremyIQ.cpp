@@ -27,6 +27,26 @@ int check(int i ,int curr){ //returns max contests from pos=i, and strength=curr
 
 
 }
+const int N= 1e5+5;
+int dpp[N][2];
+int check2(int i, int curr){
+
+    if(i>=n || curr<=0){
+        return dpp[i][0]=dpp[i][1]=0;
+    }
+
+    if(arr[i]<=curr){
+        dpp[i][0]=check2(i+1,curr);
+        dpp[i][1]=1+ check2(i+1, curr);
+    }
+    else{
+        dpp[i][0]=check2(i+1,curr);
+        dpp[i][1]=1+check2(i+1,curr-1);
+    }
+
+    return max(dpp[i][0], dpp[i][1]);
+
+}
 
 void solve(){
 
@@ -53,8 +73,18 @@ void solve(){
 
     reverse(res.begin(), res.end());
 
+    memset(dpp, -1, sizeof(dpp));
+    int ans2=check2(0,q);
+
+    string t;
+    for(int i=0;i<n; i++){
+        if(dpp[i][0]<=dpp[i][1]) t+='1';
+        else t+='0';
+    }
+
 
     cout<<res<<endl;
+    cout<<t<<endl;
 
 }
 
