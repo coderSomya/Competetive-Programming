@@ -53,7 +53,7 @@ void solve(){
     cin>>n>>q;
 
     arr.clear(); arr.resize(n);
-    memset(dp, -1, sizeof(dp));
+    memset(dp,-1,sizeof(dp));
     for(int i=0;i<n; i++) cin>>arr[i];
 
     int ans=check(0,q);
@@ -68,7 +68,6 @@ void solve(){
         else{
             res+="0";
         }
-    
     }
 
     reverse(res.begin(), res.end());
@@ -77,7 +76,7 @@ void solve(){
     int ans2=check2(0,q);
 
     string t;
-    for(int i=0;i<n; i++){
+    for(int i=0; i<n; i++){
         if(dpp[i][0]<=dpp[i][1]) t+='1';
         else t+='0';
     }
