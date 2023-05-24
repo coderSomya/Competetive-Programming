@@ -22,9 +22,9 @@ void solve(){
 
     int ans=0;
 
-    for(int i=0; i<n; i++){
+    for(int i=1; i<=n; i++){
   for(int j=0; j<i; j++) {
-    if(arr[j]-arr[i]>=0 and (arr[j]-arr[i])%3==0) ans++;
+    if(arr[j]-arr[i]>=0 && (arr[j]-arr[i])%3==0) ans++;
   }
     }
     
