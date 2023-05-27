@@ -25,28 +25,46 @@ const int inf= 1e15;
 void solve(){
    string s; cin>>s;
    int n=s.length();
-   int pref[n][4];
-   int suff[n][4];
 
-   vi as;
-   vi gs;
-
-   for(int i=0 ; i<n; i++){
-    if(s[i]=='A') as.pb(i);
-    if(s[i]=='G') gs.pb(i);
+   int dp[n][n];
+   for(int i=0; i<n; i++){
+      dp[i][i]=1;
    }
-    unordered_map<char,int> mp;
-    mp['A']=0;
-    mp['C']=1;
-    mp['T']=2;
-    mp['G']=3;
 
+   for(int i=0;i<n; i++) for(int j=0; j<n; j++) if(j<i) dp[i][j]=0;
 
+   for(int len=1; len<n; len++){
+     for(int i=0;i+len<n; i++){
+        int j=i+len;
+        if(s[i]==s[j]) dp[i][j]=2+dp[i+1][j-1];
+        else dp[i][j]=max(dp[i+1][j], dp[i][j-1]);
+     }
+   }
 
+   vector<int>as;
+   vector<int>gs;
+   for(int i=0; i<n; i++){
+   if(s[i]=='A') as.pb(i);
+   if(s[i]=='G') gs.pb(i);
+   }
+
+   int amax,gmax;
+   amax=gmax=0;
+
+   for(int i=0;i<as.size(); i++){
+for(int j=0; j<as.size(); j++) amax=max(amax, dp[as[i]][as[j]]);
+   }
+
+   for(int i=0; i<gs.size(); i++) for(int j=0; j<gs.size(); j++){
+    gmax=max(gmax, dp[gs[i]][gs[j]]);
+   }
+   
+
+   cout<<amax<<" "<<gmax<<endl;
+}
     
 
-}
-  
+
   
 int32_t main(){
 int t;
