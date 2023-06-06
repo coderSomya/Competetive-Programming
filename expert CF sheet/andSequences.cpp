@@ -26,27 +26,30 @@ int nc2(int x){
 }
 
 int fact[200005];
+
+bool isSuper(int a,int b){
+    for(int i=0; i<30; i++){
+        if(b&(1<<i)){
+            //ith bit is set in b then it has to be set in a
+            if(!(a&(1<<i))) return false;
+        }
+    }
+
+    return true;
+}
  
  
 void solve(){
     take_n
     take_arr
-    int prefand[n]; prefand[0]=arr[0];
-    int suffand[n]; suffand[n-1]=arr[n-1];
-    
+  
     int ct=0;
+    int x=arr[0];
     loop(i,1,n){
-        prefand[i]=prefand[i-1]&arr[i];
-        suffand[n-1-i]=suffand[n-i]&arr[i];
+       x=x&arr[i];
     }
     loop(i,0,n){
-        if(i==0){
-        ct+=(suffand[i+1]==arr[i]);
-        }
-        else if(i==n-1){
-        ct+=(prefand[i-1]==arr[i]);
-        }
-        else ct+= ((prefand[i-1]&suffand[i+1])== arr[i]);
+        ct+=isSuper(x,arr[i]);
     }
 
 
