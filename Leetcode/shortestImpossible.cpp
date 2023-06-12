@@ -1,3 +1,8 @@
+/*
+problem link->
+https://leetcode.com/problems/shortest-impossible-sequence-of-rolls/
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 

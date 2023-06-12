@@ -1,3 +1,8 @@
+/* 
+problem link ->
+//leetcode.com/problems/count-the-number-of-ideal-arrays/
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
