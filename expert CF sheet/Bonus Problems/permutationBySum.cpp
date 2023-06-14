@@ -39,109 +39,63 @@ void solve(){
    int n,l,r,s;
    cin>>n>>l>>r>>s;
 
-   int ans[n+1];
-
+   int ans[n+1]={0};
    int len=r-l+1;
 
-   if(l==1 and r==n){
-    if(s!=n*(n+1)/2) cout<<-1<<endl;
-    return;
-   }
+   int mini=len*(len+1)/2;
+   int maxi=n*len-len*(len-1)/2;
 
-   //there will always be either a subarray of elements
-
-   //or a subarray to the left and subarray to the right immediate to an element
-
-   //iterate on starting idx
-  int idx=-1;
-  bool flag=false;
-  int total=n*(n+1)/2;
-   for(int i=0;i<=n-len; i++){
-       //i+1...i+len
-       if(sum(i,i+len)==s){
-        idx=i;
-      
-        break;
-       }
-   }
-      int llen;
-  
-   if(idx==-1){
-    
-     //n^2 me search karo
-     for(int i=2; i<=n-1; i++){
-        for(int j=1; j<len; j++){
-            //j = left side me length
-            int rlen=len-j;
-            int ll=i-j;
-            int lr=i-1;
-            int rl=i+1;
-            int rr=i+rlen;
-
-            if(sum(ll-1,lr)+sum(rl-1,rr)==s){
-                idx=i; llen=j;
-                flag=true;
-                break;
-            }
-        }
-     }
-   }
-
-
-   if(idx==-1){
+   if(s>maxi|| s<mini){
     cout<<-1<<endl;
     return;
-   }  
-
-
-
-   int arr[n+1]={0};
-
-   if(!flag){
-    int j=l;
-    set<int> st;
-    for(int i=1; i<=n; i++) st.insert(i);
-       for(int i=1; i<=len; i++){
-  arr[j]=idx+i;
-  j++; st.erase(idx+i);
-       }
-
-       for(int i=1; i<=n; i++){
-        if(arr[i]==0){
-            int x=*(st.begin());
-            st.erase(x);
-            arr[i]=x;
-        }
-       }
    }
 
-   else{
-    int j=l;
-    set<int> st;
-    for(int i=1; i<=n; i++) st.insert(i);
-    for(int i=1; i<=llen; i++){
-        arr[j]=idx-i; j++; st.erase(idx-i);
+   int curr=mini;
+   int rt=len;
+   int last=n;
+   int idx=rt;
+   while(curr!=s){
+    
+     rt--;
+     while(idx<=last) {
+        idx++; curr++;
+        if(curr==s) break;
+     }
+     if(idx>last) {
+        curr--;
+        last--; idx=rt; }
+   }
+
+   //1..r + idx +  last..n
+
+ 
+  
+int j=l;
+  set<int> st;
+  for(int i=1; i<=n; i++) st.insert(i);
+  for(int i=1; i<=rt; i++){
+     st.erase(i);
+     ans[j]=i; j++;
+  }
+
+  for(int i=n; i>last; i--){
+     ans[j]=i; j++;
+     st.erase(i);
+  }
+
+  ans[r]=idx; st.erase(idx);
+
+
+  for(int i=1; i<=n; i++){
+    if(ans[i]==0){
+        ans[i]=*(st.begin());
+        st.erase(ans[i]);
     }
+  }
 
-    for(int i=1; i<=len-llen; i++){
-        arr[j]=idx+i; j++; st.erase(idx+i);
-    }
+  for(int i=1; i<=n; i++) cout<<ans[i]<<" ";
 
-     for(int i=1; i<=n; i++){
-        if(arr[i]==0){
-            int x=*(st.begin());
-            st.erase(x);
-            arr[i]=x;
-        }
-       }
-   
-   }
-   
-
-   for(int i=1; i<=n; i++){
-     cout<<arr[i]<<" ";
-   }
-      cout<<endl;
+  cout<<endl;
 
 
 }
