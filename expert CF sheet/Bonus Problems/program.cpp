@@ -28,9 +28,8 @@ const int inf= 1e15;
 
 int findmax(const vector<vector<int>> &maxi, int start, int end){
    int dist=log2(end-start+1);
-   cout<<dist<<endl;
-   cout<<start<<" "<<start+(1<<dist)<<" "<<end-(1<<dist)<<endl;
-   return max(maxi[start][dist], maxi[end-(1<<dist)][dist]);
+  
+   return max(maxi[start][dist], maxi[end-(1<<dist)+1][dist]);
 
 }
 
@@ -51,7 +50,7 @@ void solve(){
         if(s[i]=='+') arr[i]=arr[i-1]+1;
         else arr[i]=arr[i-1]-1;
     }
-   cout<<"made prefix array"<<endl;
+ 
     //build a sparse table
 
     vector<vector<int>> maxi(n, vector<int> (20));
@@ -64,7 +63,7 @@ void solve(){
 
     for(int pow=1; pow<20; pow++){
         for(int i=0; i<n; i++){
-            if(i+(1<<pow) < n) {
+            if(i+(1<<pow)-1< n) {
 
           
             maxi[i][pow]=max(maxi[i][pow-1], maxi[i+(1<<(pow-1))][pow-1]);
@@ -74,7 +73,7 @@ void solve(){
         }
     }
 
-    cout<<"made sparse table"<<endl;
+
    
    while(m--){
     int l,r;
@@ -87,7 +86,7 @@ void solve(){
     int large2=(r<n-1) ? findmax(maxi, r+1, n-1) : -inf;
 
    int gap=arr[r]-((l>0) ? arr[l-1] : 0);
-   cout<<"gap = "<<gap<<endl;
+
    small2-=gap;
    large2-=gap;
    small=min({(int) 0,small, small2});
