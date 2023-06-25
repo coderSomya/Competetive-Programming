@@ -66,10 +66,7 @@ void solve(){
         }
     }
 
-    for(int i=0; i<n; i++){
-        for(int j=0; j<5; j++) cout<<pref[i][j]<<" ";
-        cout<<endl;
-    }
+   
    int final=res;
     for(int i=n-1; i>=0; i--){
         int temp;
@@ -79,17 +76,41 @@ void solve(){
             temp+= contri[j+'A'];
     
             for(int k=max(maxi, (int)(s[i]-'A'));k<j; k++){
-                if(i==0) continue;
+                if(i==0) break;
                 temp-=2*(pref[i-1][k]*contri[k+'A']);
             }
             final = max(final, temp);
         }
+
+       
 
 
         maxi=max(maxi,(int)(s[i]-'A'));
         // final = max(final, temp);
 
     }
+
+     //agar abhi tak ka max i hi hai to use decrease karke bhi dekh sakte hain
+   
+   maxi=0;
+   for(int i=n-1; i>=0; i--){
+       if(s[i]-'A' <=maxi) continue;
+       int temp=res;
+       for(int j=maxi; j<s[i]-'A'; j++){
+         temp-=arr[i];
+         temp+=contri[s[i]];
+       
+         for(int k=s[i]-'A'; k>=j; k--){
+            if(i==0) break;
+             temp+= 2*pref[i-1][k]*contri[k+'A'];
+         }
+
+         final=max(final, temp);
+       }
+
+       maxi=max(maxi, (int)(s[i]-'A'));
+   }
+
 //  cout<<suff[0]<<endl;
     cout<<final<<endl;
     
