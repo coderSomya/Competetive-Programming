@@ -22,42 +22,44 @@ const int mod= 1e9+7;
 const int inf= 1e15;
 
 bool palin(string s){
-    
+    int n=s.length();
+    for(int i=0; i<n; i++){
+        if(s[i]!=s[n-1-i]) return false;
+    }
+
+    return true;
 }
  
 void solve(){
     int n; cin>>n;
     string s; cin>>s;
    int oggy=0; int jack=0;
-    if(palin(s)){
-
+    int z=0; int inc=0;
+    for(int i=0; i<n; i++){
+     z+= (s[i]=='0');
+     inc+= (i<=(n-1)/2) && (s[i]!=s[n-1-i]);
     }
 
-    else{ 
+    // inc/=2;
+  bool flag=false;
+    if(n%2 && s[n/2]=='0'){
+oggy++; flag=true;
+    } 
 
-        int inc=0;
-        int zeroes=0;
+    int rem= z- flag- inc;
 
-        for(int i=0; i<n; i++){
- zeroes+= s[i]=='0';
- if(s[i]!=s[n-1-i]) inc++;
-        }
+    jack+= max((int)0,inc - (rem>0));
+//   cout<<oggy<<" "<<jack<<endl;
+    jack+= max((rem-2)/2, (int)0);
+    oggy+= max((rem-2)/2, (int)0);
+//   cout<<oggy<<" "<<jack<<endl;
+    jack+=min(rem,(int)2);
+    // cout<<rem<<endl;
 
-       
-        inc/=2;
-         if(zeroes-inc>0){
-    oggy+= inc>=1;
-        jack+= inc-1;
+    if(palin(s)) swap(oggy, jack);
 
-        int rem=zeroes-inc;
-
-         }
-    
-
-
-
-
-    }
+    cout<<oggy<<" "<<jack<<endl;
+ 
 }
   
   

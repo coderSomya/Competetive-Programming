@@ -95,10 +95,11 @@ void solve(){
    maxi=0;
    for(int i=n-1; i>=0; i--){
        if(s[i]-'A' <=maxi) continue;
-       int temp=res;
+       int temp;
        for(int j=maxi; j<s[i]-'A'; j++){
+        temp=res;
          temp-=arr[i];
-         temp+=contri[s[i]];
+         temp+=contri[j+'A'];
        
          for(int k=s[i]-'A'; k>=j; k--){
             if(i==0) break;
