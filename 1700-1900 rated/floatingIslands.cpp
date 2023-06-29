@@ -65,10 +65,10 @@ void solve(){
     }
 
     int num=ans; int denom= n*(n-1)/2;
-// cout<<num<<" "<<denom<<endl;
+cout<<num<<" "<<denom<<endl;
     int x=__gcd(num, denom);
     num/=x; denom/=x;
-   
+     num%=mod; denom%=mod;
     cout<<(num*binexpo(denom, mod-2))%mod<<endl;
 }
 
