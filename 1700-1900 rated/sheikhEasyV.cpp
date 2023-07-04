@@ -70,18 +70,26 @@ void solve(){
 
     vector<vector<int>>ST(4*n+1, vector<int> (4, 0));
 
-    buildST(ST, v, 0,n-1, 1);
-  cout<<"ans ....."<<maxi<<endl;
-    cout<<best.first+1<<" "<<best.second+1<<endl;
+//     buildST(ST, v, 0,n-1, 1);
+//   cout<<"ans ....."<<maxi<<endl;
+//     cout<<best.first+1<<" "<<best.second+1<<endl;
    
-   int mini=n;
-    for(auto x: ST){
-        if(x[3]==maxi){
-            cout<<x[0]<<endl;
-        }
-    }
+//    int mini=n;
+//     for(auto x: ST){
+//         if(x[3]==maxi){
+//             cout<<x[0]<<endl;
+//         }
+//     }
 
-    cout<<mini<<endl;
+//     cout<<mini<<endl;
+
+vector<int> psums(n);
+psums[0]=v[0];
+for(int i=1; i<n; i++) psums[i]=psums[i-1]+v[i];
+
+vector<int> pxors(n);
+pxors[0]=v[0];
+for(int i=1; i<n; i++) pxors[i]=pxors[i-1]^v[i];
 
 }
 
