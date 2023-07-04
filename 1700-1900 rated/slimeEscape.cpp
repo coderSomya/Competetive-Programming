@@ -15,14 +15,12 @@ void solve(){
    for(int i=1; i<=n; i++){
     cin>>arr[i];
    }
-
-
    //start from the right
    int l=k-1; int h=k+1;
    int curr=arr[k];
    while(h<n+1 && l>0){
     if(h<=n && curr+arr[h]<0) break;
-      while(h<=n && curr + arr[h]>=0){
+      while(h<=n && curr+arr[h]>=0){
        curr+=arr[h];
        h++;
       }
@@ -53,9 +51,6 @@ void solve(){
        curr+=arr[h];
        h++;
       }
-     
-   
-
    }
 
    if(h==n+1 || l==0){
