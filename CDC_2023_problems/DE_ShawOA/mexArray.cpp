@@ -87,8 +87,6 @@ void solve(){
     }
     curr+=res[i];
    }
-
-
    cout<<ans<<endl;
 }
   
