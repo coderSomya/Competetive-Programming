@@ -2,9 +2,10 @@
   using namespace std;
 
 void solve(){
-  string s; cin>>s;
-  int n=s.length();
-  
+  int n; cin>>n;
+ string s; cin>>s;
+
+
   map<int,int> mp;
   int x=0;set<int> st;
   
