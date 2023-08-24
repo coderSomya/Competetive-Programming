@@ -12,8 +12,6 @@ struct Node{
 
         cnt=1;
     }
-
-
 };
 
 struct List{
